@@ -1,0 +1,3 @@
+1,How many caeds are used for a game in pinochle?,1,2,3,4,3
+2,Which is the highest mountain in the world?,Mt.K2,Mt.Makalu,Mt.Makalu,Mt.Kilimanjaro,2
+3,What is the group of frogs known as?,A traffic ,A toddler ,A police  ,An Army,1
