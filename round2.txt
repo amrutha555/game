@@ -1,0 +1,10 @@
+1,Who developed c?,Dennis Ritchie,John kemney,James Gosling,Bjarne Stroustrup,a
+2,Firewall in computer is used for?,Security,DataTransmission,Authetication,Monitoring,a
+3,Which of the following is not an operating system?,Dos,C,Linux,Mac,c
+4,Which state has the largest population?,AndhraPradesh,Maharashtra,Bihar,UttarPradesh,d
+5,First computer virus is known as?,Rabbit,creeper,Elkcloner,SCAvirus,b
+6,What is the symbol of modulo operator?,/,+,%,*,c
+7,Which element is found in vitaminB12?,Cobalt,Iron,Nickel,Zinc,a
+8,What is the national game of England?,Football,Cricket,Hockey,BasketBall,b
+9,How many elements are in periodic table?,109,106,118,112,c
+10,Which software company is headquarted in France?,Apple,Microsoft,Wipro,Capgemini,d
