@@ -1,7 +1,7 @@
 #include<stdio.h> 
 #include<stdlib.h>
 #include<string.h>
-#include"prototype.h"
+#include"header.h"
 
 extern question_ans *QA_root[2] ;
 contestant *co_root = NULL;
@@ -11,13 +11,9 @@ contestant *Contestant()
 	design();
 	printf("Wellcome to Contestant \n");
 	design(); 
-	
 	int ch , exit_flag = 0;
 	char user_id[BUFFER_SIZE] ;
 	char pswd[BUFFER_SIZE];
-	
-	
-	
 	while(1)
 	{
 		design();
@@ -30,7 +26,6 @@ contestant *Contestant()
 		design();
 		co_root = registration_contestant(co_root);
 		scanf("%d",&ch);
-		
 		switch(ch)
 		{
 			case 1:
@@ -88,17 +83,11 @@ contestant *create_list_of_contestant(contestant *source , contestant Data)
 	{
 		contestant *p = source ;	
 		contestant *temp = (contestant *) malloc(sizeof(contestant));
-		
 		strcpy(temp->user_name ,Data.user_name);
-	
 		strcpy(temp->user_id , Data.user_id);
-		
 		strcpy(temp->phone_num , Data.phone_num);
-		
 		strcpy(temp->email_id, Data.email_id);
-		
 		strcpy(temp->pswd , Data.pswd);
-		
 		 while(p->next != NULL)
 		 {
 		 	p = p->next ;
@@ -106,21 +95,15 @@ contestant *create_list_of_contestant(contestant *source , contestant Data)
 		 }
 		p->next = temp ;
 		temp->next = NULL ;
-		 
 	}
-
 	return source;	
-
 }
 
-
 contestant *registration_contestant(contestant *source)
-{
-	
+{	
 	char *str = "contestant_info.txt" ;
 	char buffer[QUESTION_BUFFER_SIZE];
-	contestant c_data ;
-	
+	contestant c_data;	
 	FILE *fptr = fopen(str,"r");
 	if(fptr == NULL)
 	{
@@ -131,15 +114,13 @@ contestant *registration_contestant(contestant *source)
 	{
 		while(!feof(fptr))
 		{
-		
 			if(!(fgets(buffer,QUESTION_BUFFER_SIZE,fptr)))
 			{
 				//printf("string reading is fail\n");
 				break ;
 			}
 			else 
-			{
-				
+			{		
 					 	c_data = data_extraction_from_contestant_file(buffer ,  c_data);
 					 	//printf("user name %s\n",c_data.user_name);
 					 	 source = create_list_of_contestant(source , c_data);
@@ -147,16 +128,13 @@ contestant *registration_contestant(contestant *source)
 			}
 		}
 	}
-	
 	fclose(fptr);	
 	return source;
-		
 }
 contestant *user_login(char *user_id , char *pswd ,contestant *c_root )
 {
 	int flag =0;
 	contestant *p = c_root ;
-	
 	//printf("user-id %s len %d , pswd %s , len %d \n",user_id,strlen(user_id),pswd,strlen(pswd));
 	while(p!= NULL)
 	{
@@ -170,7 +148,6 @@ contestant *user_login(char *user_id , char *pswd ,contestant *c_root )
 				return p;
 			}
 		}
-		
 		p = p->next;
 	}
 
@@ -179,7 +156,6 @@ contestant *user_login(char *user_id , char *pswd ,contestant *c_root )
 		printf("user name or passwors is not matching\n");
 		return NULL;
 	}
-	
 }
 
 int get_ans(char ch)
@@ -198,14 +174,10 @@ contestant *second_quiz_game(contestant *user)
 	int count = 0;
 	char ch;
 	question_ans *q = QA_root[1];
-	
 		while(q!=NULL)
 		{
-			
 			printf("Q_n %d::",q->q_num);
-			printf("%s\n",q->question);
-			
-			
+			printf("%s\n",q->question);	
 			if(q->check_flag == 1)
 			{
 				for(int i = 0 ; i < 4 ; i++)
@@ -226,7 +198,6 @@ contestant *second_quiz_game(contestant *user)
 				for(int i = 0 ; i < 4 ; i++)
 					printf("%c) %d\n",65+i,q->ans_intiger[i]);
 				scanf(" %c",&ch);
-				
 				if(q->ans_int == get_ans(ch))
 				{
 					printf("correct ans \n");
@@ -235,13 +206,10 @@ contestant *second_quiz_game(contestant *user)
 				else
 					printf("wrong ans\n");
 			}
-			
 			q = q->next;
 		}
-		
 		user->second_socre = count ;
 		user->check_2 = 1;
-		
 		printf("second round score is %d\n",user->second_socre);
 }
 
@@ -262,7 +230,6 @@ contestant *play_quiz(char *user_id , char *pswd ,contestant *c_root,question_an
 		return NULL;
 	}
 	user = user_login(user_id,pswd,p);
-	
 	//printf("retunr user id address %p\n",user);
 	if(user!=NULL)
 	{
@@ -270,22 +237,16 @@ contestant *play_quiz(char *user_id , char *pswd ,contestant *c_root,question_an
 		int ans;
 		design();
 		printf("welcome to first round %s\n",user->user_name);
-		design();
-		
+		design();		
 		while(q!=NULL)
 		{
-			
 			printf("Q_n %d::",q->q_num);
-			printf("%s\n",q->question);
-			
-			
+			printf("%s\n",q->question);	
 			if(q->check_flag == 1)
 			{
 				for(int i = 0 ; i < 4 ; i++)
 					printf("%c) %s\n",65+i,q->ans_string[i]);
-					
 				scanf(" %c",&ch);
-				
 				if(q->ans_int == get_ans(ch))
 				{
 					printf("correct ans \n");
@@ -299,7 +260,6 @@ contestant *play_quiz(char *user_id , char *pswd ,contestant *c_root,question_an
 				for(int i = 0 ; i < 4 ; i++)
 					printf("%c) %d\n",65+i,q->ans_intiger[i]);
 				scanf(" %c",&ch);
-				
 				if(q->ans_int == get_ans(ch))
 				{
 					printf("correct ans \n");
@@ -308,13 +268,10 @@ contestant *play_quiz(char *user_id , char *pswd ,contestant *c_root,question_an
 				else
 					printf("wrong ans\n");
 			}
-			
 			q = q->next;
 		}
-		
 		user->first_score = count ;
 		user->check = 1;
-		
 		printf("socre is %d\n",user->first_score);	
 		if(user->first_score >= 3)
 		{
@@ -324,25 +281,19 @@ contestant *play_quiz(char *user_id , char *pswd ,contestant *c_root,question_an
 			if(ch == 'y' || ch == 'Y')
 			{
 				printf("welcome to second round\n");
-				
 				second_quiz_game(user);
 			}
 		}	
 	  }
-
-	
 	return c_root;
 }
 
 void adding_contestant_to_file()
 {
 	contestant Data ;
-	
 	char buffer[30];
 	char *str = "contestant_info.txt" ;
-	
 	FILE *fptr ;
-	
 	fptr = fopen(str,"a");
 	if(fptr == NULL)
 	{
@@ -351,26 +302,21 @@ void adding_contestant_to_file()
 	}
 	else
 	{
-	
 		printf("enter the name\n");
 		getchar();
 		fgets(Data.user_name,20,stdin);
-		Data.user_name[strlen(Data.user_name)-1] = '\0';
-		
+		Data.user_name[strlen(Data.user_name)-1] = '\0';	
 		printf("enter user-id \n");
 		fgets(Data.user_id,20,stdin);
 		Data.user_id[strlen(Data.user_id)-1] = '\0';
-		
 		printf("enter Phone Number\n");
 		fgets(Data.phone_num , 20 , stdin);
 		Data.phone_num[strlen(Data.phone_num)-1] = '\0';
 		printf("phone number %s\n",Data.phone_num);
-		
 		printf("enter email-id\n");
 		//fgets(Data.email_id , 20 , stdin);
 		scanf("%s",Data.email_id);
-		Data.email_id[strlen(Data.email_id)] = '\0';
-		
+		Data.email_id[strlen(Data.email_id)] = '\0';:
 		printf("enter the password\n");
 		getchar();	
 		fgets(Data.pswd , 20 , stdin);
