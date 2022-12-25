@@ -6,6 +6,8 @@ int main()
 {		
 	design();
 	printf("\n\t\t\tWELCOME TO Quiz Game\n");
+	printf("\n\t\t\tPress enter to continue...!!!\n");
+	getchar();
 	design();
 	main_menu();	
 }
