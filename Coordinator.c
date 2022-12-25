@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include<string.h>
 #include<stdlib.h>
-#include"prototype.h"
+#include"header.h"
 
 extern coordinator *c_root ;
 question_ans question_extraction_from_file(char * , question_ans);
@@ -155,13 +155,9 @@ question_ans *add_new_quiz(question_ans *QA_root , char *quize_file)
 			{
 					q_data = question_extraction_from_file(buffer , q_data);
 					QA_root = create_list_for_QA(QA_root , q_data);
-				
-
-				
 			}
 		}
-	}
-		
+	}		
 return QA_root ;
 }
 
@@ -255,8 +251,6 @@ question_ans *create_list_for_QA(question_ans *source ,question_ans QA_DATA )
 		for(int i = 0 ; i < 4 ; i++)
 		printf("ans_int: %d\n",QA_DATA.ans_intiger[i]);
 	}
-		
-	
 	printf("ans_str %s\n",QA_DATA.ans_str);
 	
 	printf("ans_int : %d\n",QA_DATA.ans_int);
@@ -273,9 +267,7 @@ question_ans *create_list_for_QA(question_ans *source ,question_ans QA_DATA )
 			source->check_flag = 1;
 			for(int i = 0 ; i < 4 ; i++)
 			{
-			
-				strcpy(source->ans_string[i] , QA_DATA.ans_string[i]);
-				
+				strcpy(source->ans_string[i] , QA_DATA.ans_string[i]);	
 			}
 			
 			strcpy(source->ans_str ,QA_DATA.ans_str) ;
@@ -287,30 +279,23 @@ question_ans *create_list_for_QA(question_ans *source ,question_ans QA_DATA )
 			{
 				//printf("ans_int: %d\n",QA_DATA.ans_intiger[i]);
 				source->ans_intiger[i] = QA_DATA.ans_intiger[i] ;	
-				
-			}
-			
-			
+			}	
 		}
 	
 		source->ans_int = QA_DATA.ans_int ;
-		
 		source->next = NULL;
 	}
 	else 
 	{
 		question_ans *p = source ;	
 		question_ans *temp = (question_ans *) malloc(sizeof(question_ans));
-		
 		 while(p->next != NULL)
 		 {
 		 	p = p->next ;
-				 	
 		 }
 		 
 		temp->q_num = QA_DATA.q_num;
 		strcpy(temp->question , QA_DATA.question);
-		
 		if(QA_DATA.check_flag == 1)
 		{
 			for(int i = 0 ; i < 4 ; i++)
@@ -319,7 +304,6 @@ question_ans *create_list_for_QA(question_ans *source ,question_ans QA_DATA )
 				temp->check_flag = 1;
 				strcpy(temp->ans_string[i] , QA_DATA.ans_string[i]);
 			}
-			
 			strcpy(temp->ans_str ,QA_DATA.ans_str) ;
 		}
 		else if(QA_DATA.check_flag == 2)
@@ -328,18 +312,13 @@ question_ans *create_list_for_QA(question_ans *source ,question_ans QA_DATA )
 			{
 				//printf("ans_int: %d\n",QA_DATA.ans_intiger[i]);
 				temp->check_flag = 2;
-				temp->ans_intiger[i] = QA_DATA.ans_intiger[i] ;	
-				
+				temp->ans_intiger[i] = QA_DATA.ans_intiger[i] ;		
 			}
-			
-			
 		}
 		temp->ans_int = QA_DATA.ans_int ;
 		p->next = temp ;
 		temp->next = NULL ;
-		 
 	}
-
 	return source;	
 }
 int str_check(char *str , char *str2)
@@ -353,27 +332,21 @@ int str_check(char *str , char *str2)
 			return 0;
 		}
 	}
-	
 	return 1;
 }
 
 question_ans *update_quiz(question_ans *QA_root ,char* question_str)
 {
-	
 	if(QA_root == NULL)
 	{
 		printf("QA list is empty\n");
 		return NULL ;	
 	}
 	question_ans *p = QA_root ;
-	char ch ;
-	
+	char ch ;	
 	int flag = 0 ;
-
 	while(p!=NULL)
 	{
-	
-		
 		if(str_check(question_str ,p->question))
 		{
 			printf("%s\n",p->question);
@@ -381,10 +354,8 @@ question_ans *update_quiz(question_ans *QA_root ,char* question_str)
 			{
 				for(int i = 0 ; i < 4 ; i++)
 				{
-					printf("%d) %s\n",i, p->ans_string[i]);
-				
+					printf("%d) %s\n",i, p->ans_string[i]);			
 				}
-				
 			}
 			else if(p->check_flag == 2)
 			{
@@ -393,19 +364,16 @@ question_ans *update_quiz(question_ans *QA_root ,char* question_str)
 					printf("%d) %d\n",i,p->ans_intiger[i]);
 				}	
 			}
-			
 			printf("enter y to update the question\n");
 			scanf(" %c",&ch);
 			if(ch == 'y' || ch == 'Y')
 			{
 				printf("enter question \n");
 				getchar();
-				scanf("%[^\n]",p->question);
-				
+				scanf("%[^\n]",p->question);	
 				printf("enter 1) for string options \n");
 				printf("enter 2) for intiger options\n");
 				scanf("%d",&p->check_flag);
-				
 				if(p->check_flag == 1)
 				{
 					printf("enter option in string format only\n");
@@ -424,17 +392,13 @@ question_ans *update_quiz(question_ans *QA_root ,char* question_str)
 				}
 			}
 		}
-		
-		
 		p = p->next ;
 	}
-	
 	return QA_root ;
 }
 
 void save_QA_info_into_file(question_ans *QA_root)
 {
-	
 	if(QA_root == NULL)
 	{
 		printf("list is empty\n");
@@ -453,7 +417,6 @@ void save_QA_info_into_file(question_ans *QA_root)
 		{
 			while(p!=NULL)
 			{
-				
 				if(p->check_flag == 1)
 				{
 					p->question[strlen(p->question)-2] = '\0';
