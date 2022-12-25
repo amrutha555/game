@@ -1,50 +1,45 @@
-
+//Declaring headers
 #include<stdio.h>
 #include<string.h>
-#include"prototype.h"
+#include<unistd.h>
+#include"header.h"
 
+//To make the code optimized for designing we use this function
 void design()
-{
-	for(int i = 0 ; i <30 ; i++)
+{	
+	int i;
+	for(i=0;i<90;i++)
 		printf("*");
-	
 	printf("\n");
 }
+//Main menu of the quiz game
 int main_menu()
 {
-	
-	int ch , admin_pswd_flag = 0;
+	int ch,admin_pswd_flag = 0;
 	char user[20];
 	char password[20];
-	
 	admin_data admin_root ;
-	
 	while(1)
 	{
+		//selection of user type
 		printf("1) Admin\n");
 		printf("2) Coordinator\n");
 		printf("3) Contestant\n");
-		
 		scanf("%d",&ch);
-		
 		switch(ch)
 		{
-			case 1: 
+			case ADMIN: 
 				admin_root = read_admin_file(admin_root);
 				while(1)
 				{
-				
-					printf("enter the usr name \n");
+					printf("enter the user name \n");
 					getchar();
-					fgets(user , 20 , stdin);
+					fgets(user,20,stdin);
 					user[strlen(user)-1] = '\0';
-					
-					printf("enter the password\n");
-					scanf("%s",password);
-					
-					if(strcmp(admin_root.user_name ,user ) == 0)
+					strcpy(password,getpass("Enter Password: "));
+					if(strcmp(admin_root.user_name,user) == 0)
 					{
-						if(strcmp(admin_root.pswd ,password ) == 0)
+						if(strcmp(admin_root.pswd,password ) == 0)
 						{
 							admin();
 							break;
@@ -61,34 +56,27 @@ int main_menu()
 						printf("Too many attempts please try again\n");
 						break;
 					}
-					
 				}
-					
-				break ;
-			case 2:
+				break;
+			case COORDINATOR:
 				Coordinator() ;
-				break ;
-			case 3: 
+				break;
+			case CONTESTANT: 
 				Contestant();
-				break ;
-				
-				
+				break;	
+			default: printf("\nInvalid Choice");
 		}
-		
 	}	
-		
 }
-
+//Admin data reading from file
 admin_data read_admin_file(admin_data source)
 {
 	char *str = "admin_info.txt";
-	
 	FILE *fptr = NULL ;
 	char *piece ;
 	char buffer[QUESTION_BUFFER_SIZE];
 	int index = 1;
 	fptr = fopen(str,"r");
-	
 	if(fptr == NULL)
 	{
 		printf("%s file opening error\n",str);
@@ -97,10 +85,8 @@ admin_data read_admin_file(admin_data source)
 	{
 		while(!feof(fptr))
 		{
-		
 			if(!(fgets(buffer,QUESTION_BUFFER_SIZE,fptr)))
 			{
-				//printf("string reading is fail\n");
 				break ;
 			}
 			else 
@@ -108,8 +94,6 @@ admin_data read_admin_file(admin_data source)
 				piece = strtok(buffer,",");
 				while(piece !=NULL)
 				{
-					
-					//printf("str :%s\n",piece);
 					if(index == 1)
 					{
 						strcpy(source.user_name ,piece );
@@ -127,6 +111,6 @@ admin_data read_admin_file(admin_data source)
 			
 		}
 	}
-return source ;	
+	return source ;	
 }	
 
