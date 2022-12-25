@@ -1,24 +1,6 @@
-1.How many caeds are used for a game in pinochle?
-A)48
-B)52 
-C)32 
-D)26
-
-ans:48
-
-2.Which is the highest mountain in the world?
-A)Mt.K2
-B)Mt.Makalu
-C)Mt.Makalu
-D)Mt.Kilimanjaro
-
-ans:Mt.Kanchanjungha
-
-3.What is the group of frogs known as?
-A)A traffic
-B)A toddler 
-C)A police 
-D)An Army
-
-ans:An Army
+1,How many cards are used for a game in pinochle?,48,52,32,26,a
+2,Which is the highest mountain in the world?,Mt.K2,Mt.Makalu,Mt.Kanchanjungha,Mt.Kilimanjaro,c
+3,What is the group of frogs known as?,A traffic,A toddler,A police,An Army,d
+4,Which animal laughs like human being?,Polar Bear,Hyena,Donkey,Chimpanzee,b
+5,Name the country where there no mosquitoes are found?,Japan,Italy,Argentina,France,d
 
